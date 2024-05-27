@@ -35,10 +35,10 @@ jobs:
           cd android
           ./gradlew assembleRelease
 
-      - name: Build iOS
-        run: |
-          cd ios
-          xcodebuild -workspace amplify_rn.xcworkspace -scheme amplify_rn -configuration Release
+      # - name: Build iOS
+      #   run: |
+      #     cd ios
+      #     xcodebuild -workspace amplify_rn.xcworkspace -scheme amplify_rn -configuration Release
 
       - name: Upload to S3
         env:
@@ -47,4 +47,6 @@ jobs:
           AWS_REGION: 'ap-northeast-2'
         run: |
           aws s3 cp android/app/build/outputs/apk/release/app-release.apk s3://letsapp.store/android/app-release.apk
-          aws s3 cp ios/build/Release-iphoneos/amplify_rn.ipa s3://letsapp.store/ios/amplify_rn.ipa
+        # run: |
+        #   aws s3 cp android/app/build/outputs/apk/release/app-release.apk s3://letsapp.store/android/app-release.apk
+        #   aws s3 cp ios/build/Release-iphoneos/amplify_rn.ipa s3://letsapp.store/ios/amplify_rn.ipa
